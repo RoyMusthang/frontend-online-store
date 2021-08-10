@@ -15,9 +15,9 @@ class Categorias extends Component {
   }
 
   fetchList = async () => {
-    const listOfCategories = await api.getCategories();
+    const listaDeCategorias = await api.getCategories();
     this.setState({
-      categories: listOfCategories,
+      categories: listaDeCategorias,
     });
   }
 
