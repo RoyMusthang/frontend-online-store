@@ -1,6 +1,8 @@
 import React from 'react';
 import * as api from '../services/api';
 import ProductList from '../Components/ProductList';
+import Categories from '../Components/Categories';
+import CartButton from '../Components/CartButton';
 
 class Home extends React.Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class Home extends React.Component {
 
     this.setState({
       [name]: value,
-    });
+    }, () => this.getProductList());
   }
 
   async getProductList() {
@@ -63,10 +65,12 @@ class Home extends React.Component {
           >
             Pesquisar
           </button>
+          <CartButton />
         </header>
         <main className="main-content-container">
           { (buttonClick) ? <ProductList productList={ productList } /> : initialMsg }
         </main>
+        <Categories handleChange={ this.handleChange } />
       </div>
     );
   }
