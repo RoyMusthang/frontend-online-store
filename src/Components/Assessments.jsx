@@ -11,9 +11,6 @@ class Assessment extends Component {
   }
 
   handleChange({ target }) {
-    // const target = target;
-    // const value = value;
-    // const name = name;
     const { name, value } = target;
     this.setState({
       [name]: value,

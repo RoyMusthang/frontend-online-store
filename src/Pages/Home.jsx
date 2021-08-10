@@ -48,8 +48,8 @@ class Home extends React.Component {
     );
 
     return (
-      <div className="home-container">
-        <header className="search-input-container">
+      <div>
+        <header>
           <label htmlFor="search-input">
             <input
               id="search-input"
@@ -67,7 +67,7 @@ class Home extends React.Component {
           </button>
           <CartButton />
         </header>
-        <main className="main-content-container">
+        <main>
           { (buttonClick) ? <ProductList productList={ productList } /> : initialMsg }
         </main>
         <Categories handleChange={ this.handleChange } />
