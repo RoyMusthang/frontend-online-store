@@ -26,7 +26,12 @@ class Categorias extends Component {
     return (
       <ul>
         { categories.map((element) => (
-          <li data-testid="category" key={ element.id }>{ element.name }</li>))}
+          <li
+            data-testid="category"
+            key={ element.id }
+          >
+            { element.name }
+          </li>))}
       </ul>
     );
   }
