@@ -1,18 +1,19 @@
 import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import PadraoHome from './pages/PadraoHome';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import BarraDePesquisa from './pages/BarraDePesquisa';
+import Carrinho from './pages/Carrinho';
 
-class App extends React.Component {
-  render() {
-    return (
+function App() {
+  return (
+    <div>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ PadraoHome } />
+          <Route exact path="/" component={ BarraDePesquisa } />
+          <Route path="/Carrinho" component={ Carrinho } />
         </Switch>
       </BrowserRouter>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
