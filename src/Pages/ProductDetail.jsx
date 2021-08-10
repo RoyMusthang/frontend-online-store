@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
+import Assessment from '../Components/Assessments';
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -64,6 +65,7 @@ class ProductDetail extends React.Component {
         >
           Adicionar ao carrinho
         </button>
+        <Assessment />
       </div>
     );
   }
