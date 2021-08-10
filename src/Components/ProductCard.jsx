@@ -18,7 +18,6 @@ class ProductCard extends React.Component {
 
   render() {
     const { product: { title, thumbnail, price, id } } = this.props;
-
     return (
       <section data-testid="product">
         <Link

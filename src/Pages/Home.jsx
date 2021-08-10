@@ -14,7 +14,7 @@ class Home extends React.Component {
       buttonClick: false,
       productList: [],
     };
-
+    localStorage.setItem('productList', JSON.stringify([]));
     this.handleChange = this.handleChange.bind(this);
     this.getProductList = this.getProductList.bind(this);
   }
