@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CartButtonShopping from '../Components/CartButtonShopping';
 
 class CartPage extends Component {
   render() {
@@ -19,6 +20,7 @@ class CartPage extends Component {
               <p>{ product.price }</p>
               <img src={ product.thumbnail } alt="foto do produto" />
               <p data-testid="shopping-cart-product-quantity">1</p>
+              <CartButtonShopping />
             </div>))}
         </div>
       </div>
