@@ -6,18 +6,45 @@ class CartButtonShopping extends Component {
     super();
     this.state = {
       quantity: 0,
+      totalPrice: 0,
+      quntidadeEachItem: {},
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.somTotalPrice = this.somTotalPrice.bind(this);
+  }
+
+  somTotalPrice(price) {
+    this.setState(({ totalPrice }) => ({
+      totalPrice: totalPrice + price,
+    }));
+  }
+
+  subtractTotalPrice(price, quantity) {
+    if (quantity === 1) return;
+
+    this.setState(({ totalPrice }) => ({
+      totalPrice: totalPrice - price,
+    }));
+  }
+
+  removeItem(item) {
+    const { id } = item;
+    this.state((prev) => {
+      const { cartList } = prev;
+      const filtro = cartList.filter((cartItem) => cartItem.id !== id);
+      return { cartList: filtro };
+      });
+    };
   }
 
   // criar função de handler dinâmico
   // target.name dentro do button
-  handleButton({ target }) {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
-  }
+
+  // handleButton({ target }) {
+  //   const { name, value } = target;
+  //   this.setState({
+  //     [name]: value,
+  //   });
+  // }
 
   // handleClick() {
   //   console.log('aumentou');
