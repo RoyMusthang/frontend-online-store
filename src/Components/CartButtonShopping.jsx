@@ -10,6 +10,8 @@ class CartButtonShopping extends Component {
       quntidadeEachItem: {},
     };
     this.somTotalPrice = this.somTotalPrice.bind(this);
+    this.subtractTotalPrice = this.subtractTotalPrice.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
 
   somTotalPrice(price) {
