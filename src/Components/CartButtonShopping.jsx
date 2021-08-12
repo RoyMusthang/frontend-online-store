@@ -32,8 +32,7 @@ class CartButtonShopping extends Component {
       const { cartList } = prev;
       const filtro = cartList.filter((cartItem) => cartItem.id !== id);
       return { cartList: filtro };
-      });
-    };
+    });
   }
 
   // criar função de handler dinâmico
