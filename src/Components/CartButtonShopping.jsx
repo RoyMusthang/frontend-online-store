@@ -54,7 +54,7 @@ class CartButtonShopping extends Component {
     return (
       <div>
         <span>
-          <button type="submit" data-testid="product-increase-quantity" onClick>
+          <button type="submit" data-testid="product-increase-quantity">
             +
           </button>
         </span>
