@@ -8,15 +8,35 @@ class CartButtonShopping extends Component {
       quantity: 0,
       totalPrice: 0,
       quntidadeEachItem: {},
+      id: props.id,
     };
     this.somTotalPrice = this.somTotalPrice.bind(this);
     this.subtractTotalPrice = this.subtractTotalPrice.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.sumQuantity = this.sumQuantity.bind(this);
     this.subQuantity = this.subQuantity.bind(this);
+    this.getLocalStorage = this.getLocalStorage.bind(this);
   }
 
-  somTotalPrice(price) {
+  getLocalStorage() {
+    const { id } = this.state;
+    const storageCart = JSON.parse(localStorage.getItem('productList'));
+    const thisProduct = storageCart.find((item) => item.id === id);
+    
+    if(btn === 'sum') {
+      thisProduct.quantity += 1;
+      thisProduct.totalPrice = thisProduct.price * thisProduct.quantity;
+      localStorage.setItem('productList', JSON.stringify('productList'));
+    }
+    if(btn === 'sub') {
+      thisProduct.quantity -= 1;
+      thisProduct.totalPrice = thisProduct.price * thisProduct.quantity;
+      localStorage.setItem('productList', JSON.stringify('productList'));
+    }
+  }
+
+  somTotalPrice() {
+    const { price } = this.props;
     this.setState(({ totalPrice }) => ({
       totalPrice: totalPrice + price,
     }));
@@ -29,8 +49,9 @@ class CartButtonShopping extends Component {
     });
   }
 
-  subtractTotalPrice(price, quantity) {
-    if (quantity === 1) return;
+  subtractTotalPrice(quantity) {
+    const { price } = this.props;
+    if (quantity === 1) return; // se a quantidade for menor que 1 é undefined
 
     this.setState(({ totalPrice }) => ({
       totalPrice: totalPrice - price,
@@ -38,11 +59,23 @@ class CartButtonShopping extends Component {
     console.log('-')
   }
 
-  subQuantity() {
-    this.setState({
-      quantity: this.state.quantity - 1,
-    });
-  }
+  // subQuantity() {
+  //   this.setState({
+  //     quantity: this.state.quantity - 1,
+  //   });
+  // }
+
+  subQuantity(){
+    if(this.state.quantity === 0){
+      this.setState({
+          quantity:0
+      });
+    }else {
+      this.setState(prevState => ({
+          quantity: prevState.quantity - 1
+      }));
+    }
+}
 
   removeItem(item) {
     const { id } = item;
@@ -68,11 +101,13 @@ class CartButtonShopping extends Component {
   // }
 
   render() {
-    // const { increase } = this.state;
+    const { quantity } = this.state;
+    const { price } = this.props;
     return (
       <div>
+        <p>{quantity}</p>
+        <p>{price * quantity}</p>
         <span>
-<<<<<<< HEAD
           <button
             type="button"
             data-testid="product-increase-quantity"
@@ -81,9 +116,6 @@ class CartButtonShopping extends Component {
               this.sumQuantity();
             }}
           >
-=======
-          <button type="submit" data-testid="product-increase-quantity">
->>>>>>> 97d6519cf1437e9f2b9771e20d692c39dff6e2e3
             +
           </button>
         </span>

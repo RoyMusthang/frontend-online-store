@@ -43,7 +43,7 @@ class ProductCard extends React.Component {
         >
           Adicionar ao carrinho
         </Link>
-        <CartButtonShopping />
+        <CartButtonShopping value={ price } />
       </section>
     );
   }
