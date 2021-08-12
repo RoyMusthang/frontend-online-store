@@ -72,6 +72,7 @@ class CartButtonShopping extends Component {
     return (
       <div>
         <span>
+<<<<<<< HEAD
           <button
             type="button"
             data-testid="product-increase-quantity"
@@ -80,6 +81,9 @@ class CartButtonShopping extends Component {
               this.sumQuantity();
             }}
           >
+=======
+          <button type="submit" data-testid="product-increase-quantity">
+>>>>>>> 97d6519cf1437e9f2b9771e20d692c39dff6e2e3
             +
           </button>
         </span>
