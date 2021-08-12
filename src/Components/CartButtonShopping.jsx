@@ -10,12 +10,23 @@ class CartButtonShopping extends Component {
       quntidadeEachItem: {},
     };
     this.somTotalPrice = this.somTotalPrice.bind(this);
+    this.subtractTotalPrice = this.subtractTotalPrice.bind(this);
+    this.removeItem = this.removeItem.bind(this);
+    this.sumQuantity = this.sumQuantity.bind(this);
+    this.subQuantity = this.subQuantity.bind(this);
   }
 
   somTotalPrice(price) {
     this.setState(({ totalPrice }) => ({
       totalPrice: totalPrice + price,
     }));
+    console.log('+')
+  }
+
+  sumQuantity() {
+    this.setState({
+      quantity: this.state.quantity + 1,
+    });
   }
 
   subtractTotalPrice(price, quantity) {
@@ -24,6 +35,13 @@ class CartButtonShopping extends Component {
     this.setState(({ totalPrice }) => ({
       totalPrice: totalPrice - price,
     }));
+    console.log('-')
+  }
+
+  subQuantity() {
+    this.setState({
+      quantity: this.state.quantity - 1,
+    });
   }
 
   removeItem(item) {
@@ -54,17 +72,34 @@ class CartButtonShopping extends Component {
     return (
       <div>
         <span>
-          <button type="submit" data-testid="product-increase-quantity" onClick>
+          <button
+            type="button"
+            data-testid="product-increase-quantity"
+            onClick={() => {
+              this.somTotalPrice();
+              this.sumQuantity();
+            }}
+          >
             +
           </button>
         </span>
         <span>
-          <button type="submit" data-testid="product-decrease-quantity">
+          <button
+            type="button"
+            data-testid="product-decrease-quantity"
+            onClick={ () => {
+              this.subtractTotalPrice();
+              this.subQuantity();
+            }}
+          >
             -
           </button>
         </span>
         <span>
-          <button type="reset">
+          <button
+            type="button"
+            onClick={ this.removeItem }
+          >
             x
           </button>
         </span>
