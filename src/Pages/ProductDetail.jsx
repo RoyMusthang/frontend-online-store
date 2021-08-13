@@ -1,52 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import * as api from '../services/api';
+import CartButtonShopping from '../Components/CartButtonShopping';
 
 class ProductDetail extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super()
     this.state = {
-      product: {
-        title: '',
-        thumbnail: '',
-        price: '',
-        atributtes: [],
-      },
-    };
-    this.fetchDataFromProduct = this.fetchDataFromProduct.bind(this);
-    this.addToCart = this.addToCart.bind(this);
+      click: false,
+    }
   }
 
-  componentDidMount() {
-    this.fetchDataFromProduct();
+  componentDidMount(){
+    this.getLocalstorage();
   }
 
-  async fetchDataFromProduct() {
-    const { location: { data }, match: { params: { id } } } = this.props;
-    const productDetails = await api.getProductsFromCategoryAndQuery('', data);
-    const productResult = productDetails.results.find((value) => value.id === id);
-    console.log(productResult);
-    this.setState({
-      product: {
-        title: productResult.title,
-        thumbnail: productResult.thumbnail,
-        price: productResult.price,
-        atributtes: productResult.atributtes,
-      },
-    });
+  getLocalstorage = () => {
+    const { props: { location: { state } } } = this;
+
+    let getItem = JSON.parse(localStorage.getItem('productList') || '[]');
+    const thisProduct = getItem.find((item) => item.id === state.id);
+    if (thisProduct){
+      this.setState({
+        click: true,
+      })
+    } else {
+      this.setState({
+        click: false,
+      })
+    }
   }
 
-  addToCart() {
-    const { product } = this.state;
-    let getItem = JSON.parse(localStorage.getItem('productList'));
-    getItem = [...getItem, product];
-    localStorage.setItem('productList', JSON.stringify(getItem));
+  addToCart = () => {
+    const { props: { location: { state } } } = this;
+
+    let getItem = JSON.parse(localStorage.getItem('productList') || '[]');
+    const verify = this.verifyProduct(getItem, state);
+    if (verify === state) {
+      verify.quantity = 1
+      getItem = [...getItem, verify];
+      localStorage.setItem('productList', JSON.stringify(getItem));
+    } else {
+      verify.quantity += 1;
+      localStorage.setItem('productList', JSON.stringify(getItem));
+    }
+    this.getLocalstorage();
+  }
+
+  verifyProduct = (getItem, product) => {
+    const verify = getItem.find((item) => item.id === product.id);
+    if (verify) return verify;
+    return product;
   }
 
   render() {
-    // const { product } = this.state;
-    // const { title, thumbnail, price, atributtes } = product;
+    const { click } = this.state;
+    const { props: { location: { state } } } = this;
+    const { title, thumbnail, price, atributtes } = state;
     return (
       <div>
         Detalhes do Produto
@@ -64,6 +74,7 @@ class ProductDetail extends React.Component {
         >
           Adicionar ao carrinho
         </button>
+        { click && <CartButtonShopping id={ state.id } updateLocal={ this.getLocalstorage } />}
       </div>
     );
   }

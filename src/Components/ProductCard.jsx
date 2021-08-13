@@ -10,14 +10,27 @@ class ProductCard extends React.Component {
 
   addToCart() {
     const { product } = this.props;
-    let getItem = JSON.parse(localStorage.getItem('productList'));
-    getItem = [...getItem, product];
-    console.log(getItem);
-    localStorage.setItem('productList', JSON.stringify(getItem));
+    let getItem = JSON.parse(localStorage.getItem('productList') || '[]');
+    const verify = this.verifyProduct(getItem, product);
+    if (verify === product) {
+      product.quantity = 1
+      getItem = [...getItem, product];
+      localStorage.setItem('productList', JSON.stringify(getItem));
+    } else {
+      verify.quantity += 1;
+      localStorage.setItem('productList', JSON.stringify(getItem));
+    }
+  }
+
+  verifyProduct = (getItem, product) => {
+    const verify = getItem.find((item) => item.id === product.id);
+    if (verify) return verify;
+    return product;
   }
 
   render() {
-    const { product: { title, thumbnail, price, id } } = this.props;
+    const { product } = this.props
+    const { title, thumbnail, price, id } = product;
     return (
       <section data-testid="product">
         <h2>{ title }</h2>
@@ -30,18 +43,17 @@ class ProductCard extends React.Component {
           data-testid="product-detail-link"
           to={ {
             pathname: `/details/${id}`,
-            data: title,
+            state: product,
           } }
         >
           Detalhes do Produto
         </Link>
-        <Link
+        <button
           data-testid="product-add-to-cart"
           onClick={ this.addToCart }
-          to="/CartPage"
         >
           Adicionar ao carrinho
-        </Link>
+        </button>
       </section>
     );
   }

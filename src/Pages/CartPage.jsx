@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import CartButtonShopping from '../Components/CartButtonShopping';
 
 class CartPage extends Component {
   render() {
+    const { props: { location: { state } } } = this;
     const productFromDetail = JSON.parse(localStorage.getItem('productList'));
     return (
       <div>
@@ -17,8 +19,9 @@ class CartPage extends Component {
             >
               <h1 data-testid="shopping-cart-product-name">{ product.title }</h1>
               <p>{ product.price }</p>
-              <img src={ product.thumbnail } alt="foto do produto" />
-              <p data-testid="shopping-cart-product-quantity">1</p>
+              <img src={ product.thumbnail } alt={ product.title } />
+              <p data-testid="shopping-cart-product-quantity">{productFromDetail.quantity}</p>
+              <CartButtonShopping id={ state.id } updateLocal={ this.getLocalstorage } />
             </div>))}
         </div>
       </div>
