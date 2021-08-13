@@ -8,11 +8,11 @@ class CartPage extends Component {
     this.state = {
       empty: true,
       listStorage: [],
-    }
+    };
   }
 
   componentDidMount() {
-    this.getLocalstorage()
+    this.getLocalstorage();
   }
 
   getLocalstorage = () => {
@@ -43,9 +43,13 @@ class CartPage extends Component {
         <img src={ product.thumbnail } alt={ product.title } />
         <p data-testid="shopping-cart-product-quantity">{ product.quantity }</p>
         <CartButtonShopping id={ product.id } updateLocal={ this.getLocalstorage } />
-      </div>))
+      </div>));
 
-      const dereguejhonson = <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3>;
+    const dereguejhonson = (
+      <h3 data-testid="shopping-cart-empty-message">
+        Seu carrinho está vazio
+      </h3>
+    );
 
     return (
       <div>

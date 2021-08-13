@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class CartButtonShopping extends Component {
   constructor() {
@@ -92,5 +93,10 @@ class CartButtonShopping extends Component {
     );
   }
 }
+
+CartButtonShopping.propTypes = {
+  id: PropTypes.string.isRequired,
+  updateLocal: PropTypes.arrayOf.isRequired,
+};
 
 export default CartButtonShopping;

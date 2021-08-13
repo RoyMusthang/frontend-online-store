@@ -8,6 +8,12 @@ class ProductCard extends React.Component {
     this.addToCart = this.addToCart.bind(this);
   }
 
+  verifyProduct = (getItem, product) => {
+    const verify = getItem.find((item) => item.id === product.id);
+    if (verify) return verify;
+    return product;
+  }
+
   addToCart() {
     const { product } = this.props;
     let getItem = JSON.parse(localStorage.getItem('productList') || '[]');
@@ -20,12 +26,6 @@ class ProductCard extends React.Component {
       verify.quantity += 1;
       localStorage.setItem('productList', JSON.stringify(getItem));
     }
-  }
-
-  verifyProduct = (getItem, product) => {
-    const verify = getItem.find((item) => item.id === product.id);
-    if (verify) return verify;
-    return product;
   }
 
   render() {
@@ -49,6 +49,7 @@ class ProductCard extends React.Component {
           Detalhes do Produto
         </Link>
         <button
+          type="button"
           data-testid="product-add-to-cart"
           onClick={ this.addToCart }
         >
@@ -65,6 +66,7 @@ ProductCard.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
+    quantity: PropTypes.number,
   }).isRequired,
 };
 

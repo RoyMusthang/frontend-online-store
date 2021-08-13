@@ -87,18 +87,11 @@ class ProductDetail extends React.Component {
 
 ProductDetail.propTypes = {
   location: PropTypes.shape({
-    data: PropTypes.shape({
-      title: PropTypes.string,
-      thumbnail: PropTypes.string,
-      price: PropTypes.string,
-      atributtes: PropTypes.arrayOf(),
-    }),
-  }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }).isRequired,
-};
+    state: PropTypes.shape({}),
+  }),
+  title: PropTypes.string,
+  thumbnail: PropTypes.string,
+  price: PropTypes.number,
+}.isRequired;
 
 export default ProductDetail;
