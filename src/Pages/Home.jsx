@@ -2,7 +2,7 @@ import React from 'react';
 import * as api from '../services/api';
 import ProductList from '../Components/ProductList';
 import Categories from '../Components/Categories';
-import CartButton from '../Components/CartButton';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
   constructor(props) {
@@ -65,7 +65,13 @@ class Home extends React.Component {
           >
             Pesquisar
           </button>
-          <CartButton />
+          <Link
+            to="/CartPage"
+            alt="cart-page"
+            data-testid="shopping-cart-button"
+          >
+            Shopping Cart
+          </Link>
         </header>
         <main>
           { (buttonClick) ? <ProductList productList={ productList } /> : initialMsg }
