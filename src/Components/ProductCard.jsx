@@ -13,7 +13,7 @@ class ProductCard extends React.Component {
     let getItem = JSON.parse(localStorage.getItem('productList') || '[]');
     const verify = this.verifyProduct(getItem, product);
     if (verify === product) {
-      product.quantity = 1
+      product.quantity = 1;
       getItem = [...getItem, product];
       localStorage.setItem('productList', JSON.stringify(getItem));
     } else {
@@ -29,7 +29,7 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { product } = this.props
+    const { product } = this.props;
     const { title, thumbnail, price, id } = product;
     return (
       <section data-testid="product">

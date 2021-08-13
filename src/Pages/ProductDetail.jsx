@@ -5,29 +5,29 @@ import CartButtonShopping from '../Components/CartButtonShopping';
 
 class ProductDetail extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       click: false,
-    }
+    };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getLocalstorage();
   }
 
   getLocalstorage = () => {
     const { props: { location: { state } } } = this;
 
-    let getItem = JSON.parse(localStorage.getItem('productList') || '[]');
+    const getItem = JSON.parse(localStorage.getItem('productList') || '[]');
     const thisProduct = getItem.find((item) => item.id === state.id);
-    if (thisProduct){
+    if (thisProduct) {
       this.setState({
         click: true,
-      })
+      });
     } else {
       this.setState({
         click: false,
-      })
+      });
     }
   }
 
@@ -37,7 +37,7 @@ class ProductDetail extends React.Component {
     let getItem = JSON.parse(localStorage.getItem('productList') || '[]');
     const verify = this.verifyProduct(getItem, state);
     if (verify === state) {
-      verify.quantity = 1
+      verify.quantity = 1;
       getItem = [...getItem, verify];
       localStorage.setItem('productList', JSON.stringify(getItem));
     } else {
@@ -74,7 +74,12 @@ class ProductDetail extends React.Component {
         >
           Adicionar ao carrinho
         </button>
-        { click && <CartButtonShopping id={ state.id } updateLocal={ this.getLocalstorage } />}
+        {
+          click && <CartButtonShopping
+            id={ state.id }
+            updateLocal={ this.getLocalstorage }
+          />
+        }
       </div>
     );
   }
