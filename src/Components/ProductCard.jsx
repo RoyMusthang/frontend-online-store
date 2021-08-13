@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import CartButtonShopping from './CartButtonShopping';
 
 class ProductCard extends React.Component {
   constructor() {
@@ -39,7 +38,7 @@ class ProductCard extends React.Component {
         <Link
           data-testid="product-add-to-cart"
           onClick={ this.addToCart }
-          to="CartPage"
+          to="/CartPage"
         >
           Adicionar ao carrinho
         </Link>

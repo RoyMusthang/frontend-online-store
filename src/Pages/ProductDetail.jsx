@@ -26,6 +26,7 @@ class ProductDetail extends React.Component {
     const { location: { data }, match: { params: { id } } } = this.props;
     const productDetails = await api.getProductsFromCategoryAndQuery('', data);
     const productResult = productDetails.results.find((value) => value.id === id);
+    console.log(productResult);
     this.setState({
       product: {
         title: productResult.title,
@@ -44,8 +45,8 @@ class ProductDetail extends React.Component {
   }
 
   render() {
-    const { product } = this.state;
-    const { title, thumbnail, price, atributtes } = product;
+    // const { product } = this.state;
+    // const { title, thumbnail, price, atributtes } = product;
     return (
       <div>
         Detalhes do Produto
@@ -72,6 +73,9 @@ ProductDetail.propTypes = {
   location: PropTypes.shape({
     data: PropTypes.shape({
       title: PropTypes.string,
+      thumbnail: PropTypes.string,
+      price: PropTypes.string,
+      atributtes: PropTypes.arrayOf(),
     }),
   }).isRequired,
   match: PropTypes.shape({
