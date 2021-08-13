@@ -5,7 +5,6 @@ class CartButtonShopping extends Component {
     super();
     this.state = {
       quantity: 0,
-      // price: 0,
     };
     this.getLocalstorage = this.getLocalstorage.bind(this);
   }
